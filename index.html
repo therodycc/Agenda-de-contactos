@@ -75,9 +75,9 @@
             <div class="form">
               <input type="text" placeholder="Nombre" v-model="txtName" @keyup.enter="addContact" />
 
-              <input type="text" id="tell" placeholder="Telefono" v-model="txtPhone" @keyup.enter="addContact" />
+              <input type="number" id="tell" placeholder="Telefono" v-model="txtPhone" @keyup.enter="addContact" />
 
-              <input type="text" placeholder="Correo" v-model="txtEmail" @keyup.enter="addContact" />
+              <input type="email" placeholder="Correo" v-model="txtEmail" @keyup.enter="addContact" />
 
               <button type="submit" class="btnagregar" @click="addContact">
                 Agregar

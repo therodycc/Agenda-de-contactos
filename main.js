@@ -44,21 +44,37 @@ const app = new Vue({
       }
     },
 
-    editContact(index) {
-      if (this.txtName === "" || this.txtPhone === "" || this.txtEmail === "") {
+    async editContact(index) {
+      const { value: name } = await Swal.fire({
+        icon: "question",
+        title: "Nombre",
+        input: "text",
+        inputValue: this.contacts[index].name,
+      });
+      const { value: phone } = await Swal.fire({
+        icon: "question",
+        title: "Telefono",
+        input: "text",
+        inputValue: this.contacts[index].phone,
+      });
+      const { value: email } = await Swal.fire({
+        icon: "question",
+        title: "Correo electronico",
+        input: "email",
+        inputValue: this.contacts[index].email,
+      });
+
+      if (name && phone && email) {
         Swal.fire({
-          icon: "info",
-          title: "Por favor",
-          text: "Debe llenar todos los campos. para actualizar",
-          timer: 3000,
+          icon: "success",
+          title: "Actualizado",
+          showConfirmButton: false,
+          timer: 1000,
         });
 
-      } else {
-
-        this.contacts[index].name = this.txtName;
-        this.contacts[index].phone = this.txtPhone;
-        this.contacts[index].email = this.txtEmail;
-        
+        this.contacts[index].name = name;
+        this.contacts[index].phone = phone;
+        this.contacts[index].email = email;
       }
       this.clearInputs();
       localStorage.setItem("contacts-agenda", JSON.stringify(this.contacts));
@@ -101,16 +117,6 @@ const app = new Vue({
           this.contacts = this.containerData[0];
         }
       });
-    },
-
-    sweetAlertAdded() {
-      // const { emailSweet: email } = await Swal.fire({
-      //   title: 'Nombre',
-      //   input: 'email',
-      //   inputLabel: 'Your email address',
-      //   inputPlaceholder: 'Enter your email address'
-      // })
-      
     },
   },
 
